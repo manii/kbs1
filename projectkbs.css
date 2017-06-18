@@ -1,0 +1,150 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-jan-2017, 20:27:20
+    Author     : Denny
+*/
+
+
+
+
+
+body {
+  padding: 0 2em;
+  font-family: Arial, sans-serif;
+  color: #024457;
+  background: #f2f2f2;
+}
+
+h1 {
+  font-family: Verdana;
+  font-weight: normal;
+  color: #024457;
+  span {color: #167F92;}
+}
+
+
+.round-button {
+	width:10%;
+        display: inline-block;
+        margin-right: 25px;
+  
+}
+.round-button-circle {
+     
+	width: 100%;
+	height:0;
+	padding-bottom: 100%;
+    border-radius: 50%;
+	border:10px solid #cfdcec;
+    overflow:hidden;
+    
+    background: #4679BD; 
+    box-shadow: 0 0 3px gray;
+   
+     
+}
+.round-button-circle:hover {
+	background:#30588e;
+}
+.round-button a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
+    
+	text-align:center;
+	color:#e2eaf3;
+    font-family:Verdana;
+    font-size:1.2em;
+    font-weight:bold;
+    text-decoration:none;
+    
+}
+
+
+
+
+
+.responstable {
+  margin: 1em 0;
+  width: 100%;
+  overflow: hidden;
+  background: #FFF;
+  color: #024457;
+  border-radius: 10px;
+  border: 1px solid #167F92;
+}
+.responstable tr {
+  border: 1px solid #D9E4E6;
+}
+.responstable tr:nth-child(odd) {
+  background-color: #EAF3F3;
+}
+.responstable th {
+  display: none;
+  border: 1px solid #FFF;
+  background-color: #167F92;
+  color: #FFF;
+  padding: 1em;
+  text-align:left;
+}
+.responstable th:first-child {
+  display: table-cell;
+ 
+}
+.responstable th:nth-child(2) {
+  display: table-cell;
+}
+.responstable th:nth-child(2) span {
+  display: none;
+}
+.responstable th:nth-child(2):after {
+  content: attr(data-th);
+}
+@media (min-width: 480px) {
+  .responstable th:nth-child(2) span {
+    display: block;
+  }
+  .responstable th:nth-child(2):after {
+    display: none;
+  }
+}
+.responstable td {
+  display: block;
+  word-wrap: break-word;
+  max-width: 7em;
+}
+.responstable td:first-child {
+  display: table-cell;
+ 
+  border-right: 1px solid #D9E4E6;
+}
+@media (min-width: 480px) {
+  .responstable td {
+    border: 1px solid #D9E4E6;
+  }
+}
+.responstable th, .responstable td {
+  text-align: left;
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .responstable th, .responstable td {
+    display: table-cell;
+    padding: 1em;
+  }
+}
+
+
+
+h1 span {
+  color: #167F92;
+}
+
