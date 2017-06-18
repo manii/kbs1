@@ -74,12 +74,11 @@ if (isset($_POST['submit'])) {
 
 // data validatie
 
-    $werkgevernaam = mysql_real_escape_string(htmlspecialchars($_POST['werkgevernaam']));
+    $werkgevernaam = htmlspecialchars($_POST['werkgevernaam']);
 
-    $vestigingsplaats = mysql_real_escape_string(htmlspecialchars($_POST['vestigingsplaats']));
+    $vestigingsplaats = htmlspecialchars($_POST['vestigingsplaats']);
 
-    $link = mysql_real_escape_string(htmlspecialchars($_POST['link']));
-
+    $link = htmlspecialchars($_POST['link']);
 
 
 // check of alles is ingevuld
@@ -99,8 +98,8 @@ if (isset($_POST['submit'])) {
 
 // data opslaan in de database
 
-        $sqlwerkgever = "INSERT INTO werkgever SET werkgevernaam='$werkgevernaam', vestiginsplaats='$vestigingsplaats', link='$link' ";
-        $werkgever = $mysqli->query($sqlwerkgever);
+        $sqlwerkgever = "INSERT INTO werkgever SET werkgevernaam='$werkgevernaam', vestigingsplaats='$vestigingsplaats', link='$link' ";
+	$werkgever = $mysqli->query($sqlwerkgever);
 
 
 //na het opslaan terug naar werkervaring.php

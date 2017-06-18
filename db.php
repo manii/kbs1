@@ -2,10 +2,10 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "usbw";
+$password = "";
 
 // Create connection
-$mysqli = new mysqli("localhost", "root", "usbw");
+$mysqli = new mysqli($servername, $username, $password);
 
 if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);

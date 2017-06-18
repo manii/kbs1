@@ -1,6 +1,14 @@
 <?php
 
+// connectie database
+
+require_once('db.php');
+$mysqli->select_db("project");
+
 function renderForm($id, $firstname, $lastname, $error) {
+global $mysqli;
+
+
     ?>
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -38,6 +46,19 @@ function renderForm($id, $firstname, $lastname, $error) {
 
                     <strong>functie omschrijving: *</strong> <input type="text" name="functie_omschrijving"/><br/>
 
+		<strong>werkgever: *</strong> 
+		<select name="werkgever">
+			<?php
+				$query = "SELECT werkgever_id, werkgevernaam FROM werkgever";
+				$werkgeverDb = $mysqli->query($query);
+				
+				$werkgever = mysqli_fetch_all($werkgeverDb);
+				foreach($werkgever as $row){
+					echo "<option value='".$row[0]."'>".$row[1]."</option>";
+				}
+			?>
+		</select>
+		<br/>
                     <p>* verplicht</p>
 
                     <input type="submit" name="submit" value="Submit">
@@ -53,10 +74,7 @@ function renderForm($id, $firstname, $lastname, $error) {
     <?php
 }
 
-// connectie database
 
-require_once('db.php');
-$mysqli->select_db("project");
 
 
 
@@ -72,11 +90,10 @@ if (isset($_POST['submit'])) {
 
         $id = $_POST['id'];
 
-        $beginjaar = mysql_real_escape_string(htmlspecialchars($_POST['beginjaar']));
-
-        $functie = mysql_real_escape_string(htmlspecialchars($_POST['functie']));
-
-        $functie_omschrijving = mysql_real_escape_string(htmlspecialchars($_POST['functie_omschrijving']));
+	$beginjaar = $_POST["beginjaar"];
+	$functie = $_POST["functie"];
+	$functie_omschrijving = $_POST["functie_omschrijving"];
+	$werkgeverId = $_POST["werkgever"];
 
 
 
@@ -99,8 +116,9 @@ if (isset($_POST['submit'])) {
 
 // data opslaan in de database
 
-            $sqlwerkervaringedit = "UPDATE werkervaring SET beginjaar='$beginjaar', functie='$functie', functie_omschrijving='$functie_omschrijving' WHERE ID='$id'";
-            $editwerkervaring = $mysqli->query($sqlwerkervaringedit);
+            $sqlwerkervaringedit = "UPDATE werkervaring SET beginjaar='$beginjaar', functie='$functie', functie_omschrijving='$functie_omschrijving', werkgever_id=$werkgeverId WHERE ID='$id'";
+
+	    $editwerkervaring = $mysqli->query($sqlwerkervaringedit);
 
 
 

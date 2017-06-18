@@ -11,10 +11,10 @@ $mysqli->select_db("project");
 // Check of het formulier is ingevuld, zo ja, start het proces
 if (isset($_POST['submit'])) {
     // data validatie
-    $beginjaar = mysql_real_escape_string(htmlspecialchars($_POST['beginjaar']));
-    $functie = mysql_real_escape_string(htmlspecialchars($_POST['functie']));
-    $functie_omschrijving = mysql_real_escape_string(htmlspecialchars($_POST['functie_omschrijving']));
-
+    $beginjaar = htmlspecialchars($_POST['beginjaar']);
+    $functie = htmlspecialchars($_POST['functie']);
+    $functie_omschrijving = htmlspecialchars($_POST['functie_omschrijving']);
+    $werkgeverId = htmlspecialchars($_POST["werkgevernaam"]);
     // check of alles is ingevuld
     if ($beginjaar == '' || $functie == '' || $functie_omschrijving == '') {
 
@@ -22,16 +22,17 @@ if (isset($_POST['submit'])) {
         $error = 'ERROR: Vul de verplichte velden in!';
 
         // als een veld blanco is, laat hij het formulier nogmaals zien
-        renderForm($beginjaar, $functie, $functie_omschrijving);
+       // renderForm($beginjaar, $functie, $functie_omschrijving);
     } else {
 
         // data opslaan in de database
-        $sqlwerkervaring = "INSERT INTO werkervaring SET beginjaar='$beginjaar', functie='$functie', functie_omschrijving='$functie_omschrijving' ";
-        $werkervaring = $mysqli->query($sqlwerkervaring);
+        $sqlwerkervaring = "INSERT INTO werkervaring SET beginjaar='$beginjaar', functie='$functie', functie_omschrijving='$functie_omschrijving', werkgever_id='$werkgeverId' ";
+       $werkervaring = $mysqli->query($sqlwerkervaring);
 
         //na het opslaan terug naar werkervaring.php
         header("Location: werkervaring.php");
     }
+    //die();
 } else {
     // wanneer het formulier niet gesubmit is
     ?>
@@ -51,7 +52,7 @@ if (isset($_POST['submit'])) {
             <?php
             //            echo "<td><div class='round-button'><div class='round-button-circle'><a href='werkervaring.php' class='round-button'>Terug</a></div></div></td>";
             //als er errors zijn laat hij dit zien
-            if ($error != '') {
+            if (isset($error) AND $error != '') {
 
                 echo $error;
             }
@@ -83,11 +84,15 @@ if (isset($_POST['submit'])) {
                                 <label>Select werkgever</label>
                                 <select class="form-control" name="werkgevernaam">
                                     <?php
-                                    $result = $mysqli->query("SELECT werkgevernaam FROM werkgever ORDER BY werkgever_id");
-                                    while ($row = mysqli_fetch_array($result)) {
-                                        echo "<option id='" . $row['werkgevernaam'] . "'>" . $row['werkgevernaam'] . "</option>";
-                                    }
-                                    ?>
+				$query = "SELECT werkgever_id, werkgevernaam FROM werkgever";
+				$werkgeverDb = $mysqli->query($query);
+				
+				//pakt de data van de Query en zet het om naar een 2 dimentionaal array
+				$werkgever = mysqli_fetch_all($werkgeverDb);
+				foreach($werkgever as $row){
+					echo "<option value='".$row[0]."'>".$row[1]."</option>";
+				}
+				?>
                                 </select>
                             </td>
                         </tr>

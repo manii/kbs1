@@ -19,10 +19,6 @@
         echo "<td><div class='round-button'><div class='round-button-circle'><a href='index.php' class='round-button'>Home</a></div></div></td>";
 
 
-
-
-
-
 // connectie database
 
         require_once('db.php');
